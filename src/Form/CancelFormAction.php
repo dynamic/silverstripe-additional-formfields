@@ -3,12 +3,13 @@
 namespace Dynamic\AdditionalFormFields\Form;
 
 use SilverStripe\Forms\FormAction;
+use SilverStripe\View\HTML;
 
 /**
- * Action that takes the user back to a given link rather than submitting
- * the form.
+ * Class CancelFormAction
+ * @package Dynamic\AdditionalFormFields\Form
  *
- * @package cancelformaction
+ * Action that takes the user back to a given link rather than submitting the form.
  */
 class CancelFormAction extends FormAction
 {
@@ -19,13 +20,12 @@ class CancelFormAction extends FormAction
 
     /**
      * CancelFormAction constructor.
+     *
      * @param string $link
      * @param string $title
      * @param null $form
-     * @param null $extraData
-     * @param string $extraClass
      */
-    public function __construct($link = "", $title = "", $form = null, $extraData = null, $extraClass = '')
+    public function __construct($link = "", $title = "", $form = null)
     {
         if (!$title) {
             $title = _t('CancelFormAction.CANCEL', 'Cancel');
@@ -33,7 +33,11 @@ class CancelFormAction extends FormAction
 
         $this->setLink($link);
 
-        parent::__construct('CancelFormAction', $title, $form, $extraData, $extraClass);
+        parent::__construct(
+            'CancelFormAction',
+            $title,
+            $form
+        );
     }
 
     /**
@@ -70,10 +74,14 @@ class CancelFormAction extends FormAction
             $attributes['class'] = $attributes['class'] . ' disabled';
         }
 
-        return $this->createTag(
+        $content = $this->buttonContent ?
+            $this->buttonContent :
+            $this->Title();
+
+        return HTML::createTag(
             'a',
             $attributes,
-            $this->buttonContent ? $this->buttonContent : $this->Title()
+            $content
         );
     }
 }

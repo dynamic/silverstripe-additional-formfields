@@ -15,7 +15,7 @@ class CancelFormActionTest extends SapphireTest
     /**
      *
      */
-    function testGetLink()
+    public function testGetLink()
     {
         $action = CancelFormAction::create('example.test', 'Cancel');
         $this->assertEquals('example.test', $action->getLink());
@@ -24,14 +24,14 @@ class CancelFormActionTest extends SapphireTest
     /**
      *
      */
-    function testSetLink()
+    public function testSetLink()
     {
         $action = CancelFormAction::create('example.test', 'Cancel');
         $action->setLink('new-link.test');
         $this->assertEquals('new-link.test', $action->getLink());
     }
 
-    function testField()
+    public function testField()
     {
         $action = CancelFormAction::create('example.test', 'Cancel');
         $this->assertTrue(

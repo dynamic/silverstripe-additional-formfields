@@ -23,7 +23,7 @@ class CancelFormAction extends FormAction
      *
      * @param string $link
      * @param string $title
-     * @param null $form
+     * @param \SilverStripe\Forms\Form|null $form
      */
     public function __construct($link = "", $title = "", $form = null)
     {

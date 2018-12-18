@@ -42,7 +42,7 @@ class CancelFormActionTest extends SapphireTest
         $this->assertContains('href="example.test"', $action->Field());
         $this->assertNotContains('disabled', $action->Field());
 
-        $action->setReadonly(false);
+        $action->setReadonly(true);
         $this->assertContains('disabled', $action->Field());
     }
 }

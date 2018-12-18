@@ -1,5 +1,9 @@
 <?php
 
+namespace Dynamic\AdditionalFormFields\Form;
+
+use SilverStripe\Forms\DropdownField;
+
 /**
  * A simple extension to dropdown field, pre-configured to list states.
  */
@@ -96,14 +100,22 @@ class StateDropdownField extends DropdownField
         return i18n::get_locale();
     }*/
 
-    public function __construct($name, $title = null, $source = null, $value = '', $form = null)
+    /**
+     * StateDropdownField constructor.
+     *
+     * @param string $name The field name
+     * @param string $title The field title
+     * @param array|\ArrayAccess $source A map of the dropdown items
+     * @param mixed $value The current value
+     */
+    public function __construct($name, $title = null, $source = null, $value = '')
     {
         if (!is_array($source)) {
             // Get a list of countries from Zend
             $source = self::$stateSource;
         }
 
-        parent::__construct($name, ($title === null) ? $name : $title, $source, $value, $form);
+        parent::__construct($name, $title, $source, $value);
     }
 
     public function Field($properties = array())
@@ -111,7 +123,7 @@ class StateDropdownField extends DropdownField
         $source = $this->getSource();
 
         if (!$this->value || !isset($source[$this->value])) {
-            $this->value = $this->config()->default_state;
+            $this->value = $this->config()->get('default_state');
         }
 
         return parent::Field();

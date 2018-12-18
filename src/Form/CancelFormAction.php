@@ -1,5 +1,9 @@
 <?php
 
+namespace Dynamic\AdditionalFormFields\Form;
+
+use SilverStripe\Forms\FormAction;
+
 /**
  * Action that takes the user back to a given link rather than submitting
  * the form.
